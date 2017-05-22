@@ -24,11 +24,11 @@ void presync_energy(CCTK_ARGUMENTS)
     cctk_ash[0],cctk_ash[1],cctk_ash[2])
   {
     int cc = CCTK_GFINDEX3D(cctkGH,i,j,k);
-    double phix = (phi[cc+di]-phi[cc-di])/(2.0*CCTK_DELTA_SPACE(0));
-    double phiy = (phi[cc+dj]-phi[cc-dj])/(2.0*CCTK_DELTA_SPACE(1));
-    double phiz = (phi[cc+dk]-phi[cc-dk])/(2.0*CCTK_DELTA_SPACE(2));
-    energy[cc] = psi[cc]*psi[cc] + phix*phix +
-      phiy*phiy + phiz*phiz;
+    double psix = (psi[cc+di]-psi[cc-di])/(2.0*CCTK_DELTA_SPACE(0));
+    double psiy = (psi[cc+dj]-psi[cc-dj])/(2.0*CCTK_DELTA_SPACE(1));
+    double psiz = (psi[cc+dk]-psi[cc-dk])/(2.0*CCTK_DELTA_SPACE(2));
+    energy[cc] = phi[cc]*phi[cc] + psix*psix +
+      psiy*psiy + psiz*psiz;
   }
   CCTK_ENDLOOP3(calc_energy);
   
