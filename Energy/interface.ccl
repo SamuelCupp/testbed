@@ -1,34 +1,8 @@
 # Interface definition for thorn Energy
-implements: PresyncWave
-inherits: grid
+implements: Energy
+inherits: PresyncWave
 
-cctk_real rhs_vars type=GF timelevels=3
+cctk_real wave_energy type=GF
 {
-  phi_rhs
-  psi_rhs
+  energy
 }
-
-cctk_real evo_vars type=GF timelevels=3
-{
-  phi
-  psi
-}
-
-cctk_real evo_divs type=GF timelevels=1 tags='Prolongation="None"'
-{
-  dxx_psi
-  dyy_psi
-  dzz_psi
-}
-
-CCTK_INT FUNCTION MoLRegisterEvolvedGroup(CCTK_INT IN EvolvedIndex, \
-    CCTK_INT IN RHSIndex)
-REQUIRES FUNCTION MoLRegisterEvolvedGroup
-
-CCTK_INT FUNCTION Boundary_SelectGroupForBC(CCTK_POINTER_TO_CONST IN GH,\
-    CCTK_INT IN faces, CCTK_INT IN boundary_width, CCTK_INT IN table_handle,\
-    CCTK_STRING IN group_name, CCTK_STRING IN bc_name)
-REQUIRES FUNCTION Boundary_SelectGroupForBC
-
-CCTK_INT FUNCTION MoLQueryEvolvedRHS (CCTK_INT IN EvolvedIndex)
-REQUIRES FUNCTION MoLQueryEvolvedRHS
